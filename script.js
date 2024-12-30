@@ -70,4 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
             woodenFish.removeChild(effect);
         });
     }
+
+    // 找到元素并修改其颜色
+    document.querySelector('.colored-text').style.color = 'blue';
 });
