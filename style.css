@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1a1a2e;
+    font-family: 'Arial', sans-serif;
+    user-select: none;
+}
+
+.content-container {
+    text-align: center;
+    padding: 40px;
+}
+
+#counter {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #e2b13c;
+    text-shadow: 0 0 10px rgba(226, 177, 60, 0.3);
+}
+
+#woodenFish {
+    position: relative;
+    cursor: pointer;
+}
+
+#woodenFishImg {
+    width: 200px;
+    height: auto;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 0 15px rgba(226, 177, 60, 0.2));
+}
+
+#woodenFishImg:active {
+    transform: scale(0.95);
+}
+
+/* 点击特效样式 */
+.hit-effect {
+    position: absolute;
+    pointer-events: none;
+    font-size: 24px;
+    color: #e2b13c;
+    text-shadow: 0 0 5px rgba(226, 177, 60, 0.5);
+    animation: floatText 1s ease-out forwards;
+    z-index: 1000;
+    left: 50%;
+    top: 0;
+    opacity: 0;
+}
+
+@keyframes floatText {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 0) scale(0.8);
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) rotate(var(--rotate));
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+/* 添加新的类用于点击动画 */
+.wooden-fish-active {
+    transform: scale(0.8) !important;
+    filter: drop-shadow(0 0 20px rgba(226, 177, 60, 0.4)) !important;
+}
