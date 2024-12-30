@@ -19,10 +19,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.SYNC_TOKEN }}
           fetch-depth: 0
 
       - name: Sync local changes
+        env:
+          SYNC_TOKEN: ${{ secrets.SYNC_TOKEN }}
         run: |
           # 确保工作目录是最新的
           git pull origin main
