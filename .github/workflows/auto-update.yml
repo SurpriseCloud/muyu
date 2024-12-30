@@ -8,20 +8,36 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    permissions:      # 添加权限配置
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # 添加 token
+          fetch-depth: 0
       
       - name: Update files
         run: |
+          # 显示当前文件内容
+          echo "Current content of style.css:"
+          cat public/style.css
+          
           # 更新 style.css
-          sed -i 's/scale(0.65)/scale(0.6)/' public/style.css
-          sed -i 's/font-size: 48px/font-size: 52px/' public/style.css
-          sed -i 's/#e2b13c/#ffd700/' public/style.css
+          sed -i 's/scale(0.65)/scale(0.6)/' public/style.css || echo "Scale replace failed"
+          sed -i 's/font-size: 48px/font-size: 52px/' public/style.css || echo "Font size replace failed"
+          sed -i 's/#e2b13c/#ffd700/' public/style.css || echo "Color replace failed"
+          
+          # 显示更新后的内容
+          echo "Updated content of style.css:"
+          cat public/style.css
           
       - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config --global user.name 'GitHub Actions Bot'
-          git config --global user.email 'actions@github.com'
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
           git commit -m "Auto update files" || echo "No changes to commit"
-          git push 
+          git push origin HEAD:main 
