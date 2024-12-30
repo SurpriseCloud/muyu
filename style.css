@@ -39,7 +39,7 @@ body {
     position: absolute;
     pointer-events: none;
     font-size: 24px;
-    color: #e2b13c;
+    color: #ffd700;
     text-shadow: 0 0 5px rgba(226, 177, 60, 0.5);
     animation: floatText 1s ease-out forwards;
     z-index: 1000;
