@@ -27,7 +27,7 @@ html {
 }
 
 #counter {
-    font-size: 52px;
+    font-size: min(48px, 8vw);
     margin-bottom: 20px;
     color: #8B4513;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
@@ -36,10 +36,12 @@ html {
 #woodenFish {
     position: relative;
     cursor: pointer;
+    width: 50%;
+    margin: 0 auto;
 }
 
 #woodenFishImg {
-    width: min(200px, 50vw);
+    width: 100%;
     height: auto;
     transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     filter: drop-shadow(0 0 15px rgba(226, 177, 60, 0.2));
