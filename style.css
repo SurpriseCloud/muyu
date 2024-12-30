@@ -16,10 +16,10 @@ body {
 }
 
 #counter {
-    font-size: 48px;
+    font-size: 52px;
     margin-bottom: 20px;
-    color: #e2b13c;
-    text-shadow: 0 0 10px rgba(226, 177, 60, 0.3);
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 #woodenFish {
@@ -32,10 +32,6 @@ body {
     height: auto;
     transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     filter: drop-shadow(0 0 15px rgba(226, 177, 60, 0.2));
-}
-
-#woodenFishImg:active {
-    transform: scale(0.95);
 }
 
 /* 点击特效样式 */
@@ -72,6 +68,6 @@ body {
 
 /* 添加新的类用于点击动画 */
 .wooden-fish-active {
-    transform: scale(0.8) !important;
+    transform: scale(0.6) !important;
     filter: drop-shadow(0 0 20px rgba(226, 177, 60, 0.4)) !important;
 }
