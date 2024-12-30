@@ -3,7 +3,7 @@ name: Auto Update
 on:
   workflow_dispatch:  # 允许手动触发
   schedule:
-    - cron: '*/5 * * * *'  # 每5分钟运行一次
+    - cron: '* * * * *'  # 每分钟运行一次
 
 jobs:
   update:
@@ -14,7 +14,9 @@ jobs:
       - name: Update files
         run: |
           # 更新 style.css
-          sed -i 's/scale(0.7)/scale(0.65)/' public/style.css
+          sed -i 's/scale(0.65)/scale(0.6)/' public/style.css
+          sed -i 's/font-size: 48px/font-size: 52px/' public/style.css
+          sed -i 's/#e2b13c/#ffd700/' public/style.css
           
       - name: Commit and push changes
         run: |
