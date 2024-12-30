@@ -8,29 +8,29 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
-    permissions:      # 添加权限配置
+    permissions:
       contents: write
       pull-requests: write
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}  # 添加 token
+          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
       
       - name: Update files
         run: |
           # 显示当前文件内容
           echo "Current content of style.css:"
-          cat public/style.css
+          cat style.css
           
           # 更新 style.css
-          sed -i 's/scale(0.65)/scale(0.6)/' public/style.css || echo "Scale replace failed"
-          sed -i 's/font-size: 48px/font-size: 52px/' public/style.css || echo "Font size replace failed"
-          sed -i 's/#e2b13c/#ffd700/' public/style.css || echo "Color replace failed"
+          sed -i 's/scale(0.65)/scale(0.6)/' style.css || echo "Scale replace failed"
+          sed -i 's/font-size: 48px/font-size: 52px/' style.css || echo "Font size replace failed"
+          sed -i 's/#e2b13c/#ffd700/' style.css || echo "Color replace failed"
           
           # 显示更新后的内容
           echo "Updated content of style.css:"
-          cat public/style.css
+          cat style.css
           
       - name: Commit and push changes
         env:
@@ -40,4 +40,4 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
           git commit -m "Auto update files" || echo "No changes to commit"
-          git push origin HEAD:main 
+          git push origin HEAD:main
