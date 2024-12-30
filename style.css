@@ -23,6 +23,16 @@ html {
     text-align: center;
     padding: 20px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #counter {
@@ -35,11 +45,13 @@ html {
 #woodenFish {
     position: relative;
     cursor: pointer;
-    width: 70vmin;
+    width: 70vw;
     margin: 0 auto;
+    display: block;
 }
 
 #woodenFishImg {
+    display: block;
     width: 100%;
     height: auto;
     transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
