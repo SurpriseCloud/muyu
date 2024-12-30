@@ -22,9 +22,7 @@ html {
 .content-container {
     text-align: center;
     padding: 20px;
-    box-sizing: border-box;
     width: 100%;
-    max-width: 800px;
 }
 
 #counter {
@@ -37,8 +35,7 @@ html {
 #woodenFish {
     position: relative;
     cursor: pointer;
-    width: 50vw;
-    max-width: 400px;
+    width: 70vmin;
     margin: 0 auto;
 }
 
