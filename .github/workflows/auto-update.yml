@@ -1,0 +1,25 @@
+name: Auto Update
+
+on:
+  workflow_dispatch:  # 允许手动触发
+  schedule:
+    - cron: '*/5 * * * *'  # 每5分钟运行一次
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Update files
+        run: |
+          # 更新 style.css
+          sed -i 's/scale(0.7)/scale(0.65)/' public/style.css
+          
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          git add .
+          git commit -m "Auto update files" || echo "No changes to commit"
+          git push 
