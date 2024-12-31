@@ -12,7 +12,6 @@ body {
     user-select: none;
 }
 
-/* 让整个页面可点击 */
 .click-layer {
     position: fixed;
     top: 0;
@@ -22,7 +21,6 @@ body {
     z-index: 1;
 }
 
-/* 内容居中但不撑满 */
 .content-container {
     position: fixed;
     left: 50%;
@@ -32,10 +30,17 @@ body {
     z-index: 2;
 }
 
+#counter {
+    font-size: min(48px, 8vw);
+    margin-bottom: 20px;
+    color: #8B4513;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
 #woodenFish {
     position: relative;
     cursor: pointer;
-    width: 200px;  /* 固定合适的尺寸 */
+    width: 200px;
     margin: 0 auto;
 }
 
@@ -46,7 +51,6 @@ body {
     filter: drop-shadow(0 0 15px rgba(226, 177, 60, 0.2));
 }
 
-/* 点击特效样式 */
 .hit-effect {
     position: absolute;
     pointer-events: none;
@@ -74,11 +78,6 @@ body {
     }
 }
 
-.hidden {
-    display: none;
-}
-
-/* 添加新的类用于点击动画 */
 .wooden-fish-active {
     transform: scale(0.6) !important;
     filter: drop-shadow(0 0 20px rgba(226, 177, 60, 0.4)) !important;
