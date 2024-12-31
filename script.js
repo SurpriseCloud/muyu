@@ -16,11 +16,17 @@ document.addEventListener('DOMContentLoaded', () => {
         count++;
         counter.textContent = count;
         
+        // 更新计数器文字
+        counter.setAttribute('data-value', count);
+        
         // 添加动画类
         counter.classList.add('counter-animate');
         setTimeout(() => {
-            counter.classList.remove('counter-animate');
-        }, 150);
+            counter.classList.add('reset');
+            setTimeout(() => {
+                counter.classList.remove('counter-animate', 'reset');
+            }, 75);
+        }, 75);
         
         // 保存到本地存储
         localStorage.setItem('woodenFishCount', count);
@@ -37,12 +43,27 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // 创建点击特效
         createHitEffect();
+
+        // 创建并添加加号动画
+        const plusOne = document.createElement('div');
+        plusOne.className = 'plus-one';
+        plusOne.textContent = '+1功德';
+        counter.appendChild(plusOne);
+        
+        // 动画结束后移除元素
+        plusOne.addEventListener('animationend', () => {
+            counter.removeChild(plusOne);
+        });
     });
 
     // 创建点击特效
     function createHitEffect() {
         const effect = document.createElement('div');
         effect.className = 'hit-effect';
+        
+        // 随机选择颜色组合
+        const colorIndex = Math.floor(Math.random() * 3) + 1;
+        effect.setAttribute('data-color', colorIndex);
         
         // 添加文字内容
         const popupTexts = [

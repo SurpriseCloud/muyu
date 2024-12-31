@@ -8,7 +8,7 @@ html, body {
 
 body {
     background: #1a1a2e;
-    font-family: 'Arial', sans-serif;
+    font-family: 'STYuanti', 'STYuanti-SC-Regular', 'Yuanti SC', sans-serif;
     user-select: none;
 }
 
@@ -24,36 +24,88 @@ body {
 .content-container {
     position: fixed;
     left: 50%;
-    top: 50%;
+    top: 45%;
     transform: translate(-50%, -50%);
     text-align: center;
     z-index: 2;
-    width: 100%;
+}
+
+@property --color-1 {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: hsl(98 100% 62%);
+}
+
+@property --color-2 {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: hsl(204 100% 59%);
+}
+
+@keyframes gradient-change {
+    0% {
+        --color-1: hsl(98 100% 62%);
+        --color-2: hsl(204 100% 59%);
+    }
+    33% {
+        --color-1: hsl(204 100% 59%);
+        --color-2: hsl(310 100% 59%);
+    }
+    66% {
+        --color-1: hsl(310 100% 59%);
+        --color-2: hsl(98 100% 62%);
+    }
+    100% {
+        --color-1: hsl(98 100% 62%);
+        --color-2: hsl(204 100% 59%);
+    }
 }
 
 #counter {
-    position: absolute;
-    width: 100%;
-    top: -20vh;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    font-size: 15vw;
-    line-height: 1;
-    color: #8B4513;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    font-size: 20vw;
+    font-weight: 900;
+    font-family: 'Impact', 'Arial Black', sans-serif;
+    position: relative;
     text-align: center;
     white-space: nowrap;
-    z-index: 1;
-    background: transparent;
-    pointer-events: none;
+    display: inline-block;
+    
+    background: linear-gradient(
+        to right in oklch,
+        var(--color-1),
+        var(--color-2)
+    );
+    
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* 将颜色动画应用到伪元素上 */
+#counter::before {
+    content: attr(data-value);  /* 使用data属性显示数字 */
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    animation: gradient-change 6s linear infinite;
+    background: linear-gradient(
+        to right in oklch,
+        var(--color-1),
+        var(--color-2)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #woodenFish {
     position: relative;
     cursor: pointer;
     width: 200px;
-    margin: 0 auto;
+    margin: 60px auto 0;
     z-index: 2;
 }
 
@@ -68,13 +120,37 @@ body {
     position: absolute;
     pointer-events: none;
     font-size: 24px;
-    color: #ffd700;
-    text-shadow: 0 0 5px rgba(226, 177, 60, 0.5);
     animation: floatText 1s ease-out forwards;
     z-index: 1000;
     left: 50%;
     top: 0;
     opacity: 0;
+    font-weight: 700;
+    background: linear-gradient(
+        to right in oklch,
+        var(--color-1),
+        var(--color-2)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 8px var(--color-1));
+    font-family: 'STYuanti', 'STYuanti-SC-Regular', 'Yuanti SC', sans-serif;
+}
+
+.hit-effect[data-color="1"] {
+    --color-1: hsl(98 100% 62%);
+    --color-2: hsl(204 100% 59%);
+}
+
+.hit-effect[data-color="2"] {
+    --color-1: hsl(204 100% 59%);
+    --color-2: hsl(310 100% 59%);
+}
+
+.hit-effect[data-color="3"] {
+    --color-1: hsl(310 100% 59%);
+    --color-2: hsl(98 100% 62%);
 }
 
 @keyframes floatText {
@@ -96,12 +172,65 @@ body {
     filter: drop-shadow(0 0 20px rgba(226, 177, 60, 0.4)) !important;
 }
 
+/* 点击动画 */
 .counter-animate {
-    animation: counterPop 0.15s ease;
+    transform: scale(1.1);
+    transition: transform 0.075s ease-out;
+    text-shadow: 0 0 2px var(--color-1),
+                 0 0 4px var(--color-2);
 }
 
-@keyframes counterPop {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+.counter-animate.reset {
+    transform: scale(1);
+    transition: all 0.075s ease-in;
+    text-shadow: none;
+}
+
+/* 确保伪元素也跟随动画 */
+.counter-animate::before {
+    text-shadow: 0 0 2px var(--color-1),
+                 0 0 4px var(--color-2);
+}
+
+.counter-animate.reset::before {
+    text-shadow: none;
+}
+
+/* 修改功德+1的样式 */
+.plus-one {
+    position: absolute;
+    left: 50%;
+    top: -25px;
+    transform: translateX(-50%);
+    font-size: 15px;
+    font-weight: 400;
+    animation: plusOneAnim 0.5s ease-out forwards, gradient-change 6s linear infinite;
+    background: linear-gradient(
+        to right in oklch,
+        var(--color-1),
+        var(--color-2)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 10;
+    font-family: 'STYuanti', 'STYuanti-SC-Regular', 'Yuanti SC', sans-serif;
+}
+
+@keyframes plusOneAnim {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 0);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -35px);
+    }
 }
